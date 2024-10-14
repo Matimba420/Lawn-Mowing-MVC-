@@ -1,0 +1,84 @@
+﻿@model Lawn_Mowing.Models.Booking
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create - Lawn_Mowing</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <h1>Create Booking</h1>
+            <h4>Booking</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="CustomerId">Customer</label>
+                            <select class="form-control" id="CustomerId" name="CustomerId" required>
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewData["CustomerId"])
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="CustomerId"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="OperatorId">Operator</label>
+                            <select class="form-control" id="OperatorId" name="OperatorId" required>
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewData["OperatorId"])
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="OperatorId"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="MachineId">Machine</label>
+                            <select class="form-control" id="MachineId" name="MachineId" required>
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewData["MachineId"])
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="MachineId"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="BookingDate">Booking Date</label>
+                            <input class="form-control" type="date" id="BookingDate" name="BookingDate" required />
+                            <span class="text-danger" asp-validation-for="BookingDate"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="DurationInHours">Duration (Hours)</label>
+                            <input class="form-control" type="number" id="DurationInHours" name="DurationInHours" min="1" required />
+                            <span class="text-danger" asp-validation-for="DurationInHours"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
+            </div>
+            <div>
+                <a href="/Booking">Check your requested booking status</a>
+            </div>
+        </main>
+    </div>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
